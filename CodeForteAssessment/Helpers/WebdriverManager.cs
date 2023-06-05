@@ -80,7 +80,6 @@ namespace CodeForteAssessment.Helpers
 
                         options.AddArgument("--disable-infobars");
                         options.AddArgument("start-maximized");
-                        //options.AddUserProfilePreference("");
                         options.AddUserProfilePreference("download.prompt_for_download", false);
                         Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
                         _webDriver = new ChromeDriver(AppDomain.CurrentDomain.BaseDirectory, options);
@@ -99,7 +98,6 @@ namespace CodeForteAssessment.Helpers
         {
             ITakesScreenshot takesScreenshot = _webDriver as ITakesScreenshot;
             Screenshot ss = takesScreenshot.GetScreenshot();
-            //((ITakesScreenshot)Driver).GetScreenshot();
             ss.SaveAsFile(path);
         }
     }

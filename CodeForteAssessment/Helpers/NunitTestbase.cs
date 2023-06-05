@@ -1,11 +1,6 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using CodeForteAssessment.Static;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeForteAssessment.Helpers
 {
@@ -13,7 +8,6 @@ namespace CodeForteAssessment.Helpers
     {
         public static ExtentTest test;
         public static ExtentReports extent;
-        //public static APITestHelpers response = new();
 
         [OneTimeSetUp]
         public void ExtentStart()

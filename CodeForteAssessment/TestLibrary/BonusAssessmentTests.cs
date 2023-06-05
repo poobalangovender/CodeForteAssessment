@@ -8,12 +8,18 @@ namespace CodeForteAssessment.TestLibrary
 {
     public class BonusAssessmentTests : NunitTestbase
     {
+        //Commoon Login helper function to login to the website
         private void Login(string username, string password)
         {
+            //CLear Username text and enter username
             Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div/div[1]/div/div[2]/div[2]/form/div[1]/div/div[2]/input")).Clear();
             Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div/div[1]/div/div[2]/div[2]/form/div[1]/div/div[2]/input")).SendKeys(username);
+            
+            //Clear password text and  enter  password 
             Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div/div[1]/div/div[2]/div[2]/form/div[2]/div/div[2]/input")).Clear();
             Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div/div[1]/div/div[2]/div[2]/form/div[2]/div/div[2]/input")).SendKeys(password);
+            
+            //Click the login button
             Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div/div[1]/div/div[2]/div[2]/form/div[3]/button")).Click();
         }
 
@@ -22,14 +28,26 @@ namespace CodeForteAssessment.TestLibrary
         {
             try
             {
+                //setup extent reporting
                 test = null;
                 test = extent.CreateTest("LoadValidCredentials").Info("Load Valid Credentials");
 
+                //Initialize browser - Select browser
                 InitBrowser("Chrome");
+
+                //Loadwebsite under test
                 LoadWebsite(ConfigData.BonusTestSite);
+
+                //Calls login function mentioned above
                 Login(username, password);
+
+                //Assert that the dashboard is displayed correctly
                 Assert.That(Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div[1]/header/div[1]/div[1]/span/h6")).Displayed, Is.True);
+                
+                //Takes a screenshot, added to screenshot folder within the project
                 TakeScreenshot(ConfigData.Screenshotdirectory + screenshotname + DateTime.Now.ToString("yyyyMMddHHmmss") + ".png");
+                
+                //Logs the Test on the extent template report - Reports folder within the project
                 test.Log(Status.Pass, "Test Pass");
             }
             catch (Exception ex)
