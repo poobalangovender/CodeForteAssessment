@@ -8,7 +8,7 @@ namespace CodeForteAssessment.TestLibrary
 {
     public class BonusAssessmentTests : NunitTestbase
     {
-        //Commoon Login helper function to login to the website
+        //Common Login helper function to login to the website
         private void Login(string username, string password)
         {
             //CLear Username text and enter username
@@ -68,6 +68,8 @@ namespace CodeForteAssessment.TestLibrary
                 LoadWebsite(ConfigData.BonusTestSite);
                 Login(username, password);
                 Assert.That(Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div[1]/header/div[1]/div[1]/span/h6")).Displayed, Is.True);
+                
+                //logout
                 Driver.FindElement(By.ClassName("oxd-userdropdown-name")).Click();
                 Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div[1]/header/div[1]/div[2]/ul/li/ul/li[4]/a")).Click();
                 Assert.That(Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div/div[1]/div/div[1]/img")).Displayed, Is.True);
@@ -116,10 +118,18 @@ namespace CodeForteAssessment.TestLibrary
                 Driver.FindElement(By.ClassName("oxd-input")).Clear();
                 Driver.FindElement(By.ClassName("oxd-input")).SendKeys("My Info");
                 Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div[1]/aside/nav/div[2]/ul/li/a/span")).Click();
+                Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[3]/div[1]/div[2]/div/div[2]/div/div/div[1]")).SendKeys("Married");
                 Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[3]/div[1]/div[2]/div/div[2]/div/div/div[1]")).Click();
-                Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[3]/div[1]/div[2]/div/div[2]/div/div/div[1]")).SendKeys("Single");
                 Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[3]/div[2]/div[2]/div/div[2]/div[2]/div[2]/div/label/span")).Click();
                 Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[5]/button")).Click();
+                TakeScreenshot(ConfigData.Screenshotdirectory + screenshotname + DateTime.Now.ToString("yyyyMMddHHmmss") + ".png");
+                Driver.FindElement(By.ClassName("oxd-userdropdown-name")).Click();
+                Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div[1]/header/div[1]/div[2]/ul/li/ul/li[4]/a")).Click();
+                Login(username, password);
+                Driver.FindElement(By.ClassName("oxd-input")).Clear();
+                Driver.FindElement(By.ClassName("oxd-input")).SendKeys("My Info");
+                Driver.FindElement(By.XPath("//*[@id='app']/div[1]/div[1]/aside/nav/div[2]/ul/li/a/span")).Click();
+                Thread.Sleep(2000);
                 TakeScreenshot(ConfigData.Screenshotdirectory + screenshotname + DateTime.Now.ToString("yyyyMMddHHmmss") + ".png");
                 test.Log(Status.Pass, "Test Pass");
             }
